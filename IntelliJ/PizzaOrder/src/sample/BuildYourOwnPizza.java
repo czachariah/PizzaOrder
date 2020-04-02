@@ -9,10 +9,10 @@ import java.util.ArrayList;
  */
 public class BuildYourOwnPizza extends Pizza
 {
-    public final int BuildYourOwnSmallPrice = 5;
-    public final int BuildYourOwnMediumPrice = BuildYourOwnSmallPrice + 2;
-    public final int BuildYourOwnLargePrice = BuildYourOwnSmallPrice + 4;
-    public final int pricePerTopping = 2;
+    public final int BUILD_YOUR_OWN_SMALL_PRICE = 5;
+    public final int BUILD_YOUR_OWN_MEDIUM_PRICE = BUILD_YOUR_OWN_SMALL_PRICE + 2;
+    public final int BUILD_YOUR_OWN_LARGE_PRICE = BUILD_YOUR_OWN_SMALL_PRICE + 4;
+    public final int PRICE_PER_TOPPING = 2;
 
     /**
      * This is the parameterized constructor for the HawaiianPizza class.
@@ -43,15 +43,15 @@ public class BuildYourOwnPizza extends Pizza
     {
         if (this.size.equals("Small (10\")"))
         {
-            return BuildYourOwnSmallPrice + (this.toppings.size() * pricePerTopping);
+            return BUILD_YOUR_OWN_SMALL_PRICE + (this.toppings.size() * PRICE_PER_TOPPING);
         }
         else if (this.size.equals("Medium (12\")"))
         {
-            return BuildYourOwnMediumPrice + (this.toppings.size() * pricePerTopping);
+            return BUILD_YOUR_OWN_MEDIUM_PRICE + (this.toppings.size() * PRICE_PER_TOPPING);
         }
         else
         {
-            return BuildYourOwnLargePrice + (this.toppings.size() * pricePerTopping);
+            return BUILD_YOUR_OWN_LARGE_PRICE + (this.toppings.size() * PRICE_PER_TOPPING);
         }
     } // pizzaPrice()
 } // BuildYourPizza

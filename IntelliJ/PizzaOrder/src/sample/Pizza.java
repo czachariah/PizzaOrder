@@ -27,6 +27,18 @@ public abstract class Pizza
     } // Pizza(3)
 
     /**
+     * This is the 2-parameter Pizza constructor.
+     * @param style is the type of the pizza : Deluxe , Hawaiian , or Build-Your-Own
+     * @param size is the size of the Pizza
+     */
+    public Pizza(String style, String size)
+    {
+        this.style = style;
+        this.size = size;
+        this.toppings = null;
+    } // Pizza(2)
+
+    /**
      * This is the abstract method that will be implemented in all the subclasses.
      * @return the total price of the pizza.
      */
@@ -54,10 +66,4 @@ public abstract class Pizza
 /*
 
 
-public Pizza(String style, String size)
-{
-    this.style = style;
-    this.size = size;
-    this.toppings = null;
-} // Pizza(2)
  */

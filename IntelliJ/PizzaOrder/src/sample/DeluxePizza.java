@@ -9,9 +9,9 @@ import java.util.ArrayList;
  */
 public class DeluxePizza extends Pizza
 {
-    public final int DeluxeSmallPrice = 14;
-    public final int DeluxeMediumPrice = DeluxeSmallPrice + 2;
-    public final int DeluxeLargePrice = DeluxeSmallPrice + 4;
+    public final int DELUXE_SMALL_PRICE = 14;
+    public final int DELUXE_MEDIUM_PRICE = DELUXE_SMALL_PRICE + 2;
+    public final int DELUXE_LARGE_PRICE = DELUXE_SMALL_PRICE + 4;
 
     /**
      * This is the parameterized constructor for the DeluxePizza class.
@@ -42,15 +42,15 @@ public class DeluxePizza extends Pizza
     {
         if (this.size.equals("Small (10\")"))
         {
-            return DeluxeSmallPrice;
+            return DELUXE_SMALL_PRICE;
         }
         else if (this.size.equals("Medium (12\")"))
         {
-            return DeluxeMediumPrice;
+            return DELUXE_MEDIUM_PRICE;
         }
         else
         {
-            return DeluxeLargePrice;
+            return DELUXE_LARGE_PRICE;
         }
     } // pizzaPrice()
 } // DeluxePizza

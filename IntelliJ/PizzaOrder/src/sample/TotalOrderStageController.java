@@ -31,18 +31,21 @@ public class TotalOrderStageController
 
     public ArrayList<Pizza> totalOrder;
 
+    /**
+     * This method will take in the Pizza order from the main stage to display the contents and figure out the price.
+     * @param order is the current pizza order from the main stage
+     */
     public void getOrder(ArrayList<Pizza> order)
     {
         // get the total order
         totalOrder = order;
-
+        // skip to the next line after the opening statement
         Output.appendText("\n\n");
 
         if (totalOrder == null)
         {
             totalOrder = new ArrayList<>();
         }
-
         if (totalOrder.size() == 0)
         {
             Output.appendText("There are no pizzas in this order. Total Price: $0\n\n");
@@ -57,10 +60,11 @@ public class TotalOrderStageController
             }
             Output.appendText("The total price of the order is: $" + totalPrice + "\n\n");
         }
-
     } // getOrder()
 
-
+    /**
+     * This method clears out the current Pizza order.
+     */
     public void clearOrder()
     {
         totalOrder.clear();

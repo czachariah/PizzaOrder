@@ -9,9 +9,9 @@ import java.util.ArrayList;
  */
 public class HawaiianPizza extends Pizza
 {
-    public final int HawaiianSmallPrice = 8;
-    public final int HawaiianMediumPrice = HawaiianSmallPrice + 2;
-    public final int HawaiianLargePrice = HawaiianSmallPrice + 4;
+    public final int HAWAIIAN_SMALL_PRICE = 8;
+    public final int HAWAIIAN_MEDIUM_PRICE = HAWAIIAN_SMALL_PRICE + 2;
+    public final int HAWAIIAN_LARGE_PRICE = HAWAIIAN_SMALL_PRICE + 4;
 
     /**
      * This is the parameterized constructor for the HawaiianPizza class.
@@ -42,15 +42,15 @@ public class HawaiianPizza extends Pizza
     {
         if (this.size.equals("Small (10\")"))
         {
-            return HawaiianSmallPrice;
+            return HAWAIIAN_SMALL_PRICE;
         }
         else if (this.size.equals("Medium (12\")"))
         {
-            return HawaiianMediumPrice;
+            return HAWAIIAN_MEDIUM_PRICE;
         }
         else
         {
-            return HawaiianLargePrice;
+            return HAWAIIAN_LARGE_PRICE;
         }
     } // pizzaPrice()
 } // HawaiianPizza
