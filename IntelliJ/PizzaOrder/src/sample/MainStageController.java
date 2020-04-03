@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
  */
 public class MainStageController implements Initializable
 {
-    public final int WIDTH = 975;
+    public final int WIDTH = 1060;
     public final int LENGTH = 630;
 
     ArrayList<Pizza> pizzaOrder = new ArrayList<>();
