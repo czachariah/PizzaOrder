@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -83,6 +84,8 @@ public class MainStageController implements Initializable
         PizzaTypeDropDown.setValue("Build Your Own");
         pizzaTypeChange();
 
+        allToppingsList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        ChoiceToppingList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     } // initialize()
 
     /**
@@ -197,25 +200,33 @@ public class MainStageController implements Initializable
      */
     public void addTopping()
     {
-        String toppingChoice = allToppingsList.getSelectionModel().getSelectedItem();
-        if (toppingChoice == null)
+        ObservableList<String> toppingChoice = allToppingsList.getSelectionModel().getSelectedItems();
+        if (toppingChoice == null || toppingChoice.size() == 0)
         {
             OutPutArea.clear();
             OutPutArea.appendText("ERROR: Please first choose a topping from the Toppings List to add to the pizza.");
         }
         else
         {
-            if (selectedToppings.size() < MAX_TOPPINGS)
+            ArrayList<String> temp = new ArrayList<>();
+            for (String s: toppingChoice)
             {
-                selectedToppings.add(toppingChoice);
+                temp.add(s);
+            }
+
+            while(selectedToppings.size() < MAX_TOPPINGS && temp.size() != 0)
+            {
+                selectedToppings.add(temp.get(0));
                 ChoiceToppingList.setItems(FXCollections.observableArrayList(selectedToppings));
-                toppings.remove(toppingChoice);
+                toppings.remove(temp.remove(0));
                 allToppingsList.setItems(FXCollections.observableArrayList(toppings));
             }
-            else
+
+            if (temp.size() != 0)
             {
                 OutPutArea.clear();
                 OutPutArea.appendText("ERROR: You may only choose up to 6 toppings.");
+                temp.clear();
             }
         }
     } // addTopping()
@@ -225,6 +236,7 @@ public class MainStageController implements Initializable
      */
     public void removeToppings()
     {
+        ObservableList<String> toppingChoice = ChoiceToppingList.getSelectionModel().getSelectedItems();
         if (selectedToppings.size() == EMPTY)
         {
             OutPutArea.clear();
@@ -232,18 +244,26 @@ public class MainStageController implements Initializable
             return;
         }
 
-        String toppingToRemove = ChoiceToppingList.getSelectionModel().getSelectedItem();
-        if (toppingToRemove == null)
+        if (toppingChoice == null || toppingChoice.size() == 0)
         {
             OutPutArea.clear();
             OutPutArea.appendText("ERROR: Please first choose a topping from the Selected Toppings List to remove from the pizza.");
         }
         else
         {
-            selectedToppings.remove(toppingToRemove);
-            ChoiceToppingList.setItems(FXCollections.observableArrayList(selectedToppings));
-            toppings.add(toppingToRemove);
-            allToppingsList.setItems(FXCollections.observableArrayList(toppings));
+            ArrayList<String> temp = new ArrayList<>();
+            for (String s: toppingChoice)
+            {
+                temp.add(s);
+            }
+
+            while (temp.size() != 0)
+            {
+                selectedToppings.remove(temp.get(0));
+                ChoiceToppingList.setItems(FXCollections.observableArrayList(selectedToppings));
+                toppings.add(temp.remove(0));
+                allToppingsList.setItems(FXCollections.observableArrayList(toppings));
+            }
         }
     } // removeToppings()
 
