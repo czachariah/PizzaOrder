@@ -15,7 +15,7 @@ public abstract class Pizza
 
     /**
      * This is the 3-parameter Pizza constructor.
-     * @param style is the type of the pizza : Deluxe , Hawaiian , or Build-Your-Own
+     * @param style is the type of the pizza : Deluxe , Hawaiian , or Build Your Own
      * @param size is the size of the Pizza
      * @param toppings is the list of toppings on the Pizza
      */
@@ -62,8 +62,3 @@ public abstract class Pizza
         return this.toppings.toString();
     } // getToppings()
 } // Pizza
-
-/*
-
-
- */

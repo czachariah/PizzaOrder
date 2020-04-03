@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author Chris Zachariah (cvz2)
  * @author Anthony Topol (at877)
  */
-public class HawaiianPizza extends Pizza
+public class Hawaiian extends Pizza
 {
     public final int HAWAIIAN_SMALL_PRICE = 8;
     public final int HAWAIIAN_MEDIUM_PRICE = HAWAIIAN_SMALL_PRICE + 2;
@@ -19,7 +19,7 @@ public class HawaiianPizza extends Pizza
      * @param size is the size of the Hawaiian Pizza
      * @param toppings is the list of toppings on the Hawaiian Pizza
      */
-    public HawaiianPizza(String style, String size, ArrayList<String> toppings)
+    public Hawaiian(String style, String size, ArrayList<String> toppings)
     {
         super(style,size,toppings);
     } // HawaiianPizza()

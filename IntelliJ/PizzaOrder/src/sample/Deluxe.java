@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *  @author Chris Zachariah (cvz2)
  *  @author Anthony Topol (at877)
  */
-public class DeluxePizza extends Pizza
+public class Deluxe extends Pizza
 {
     public final int DELUXE_SMALL_PRICE = 14;
     public final int DELUXE_MEDIUM_PRICE = DELUXE_SMALL_PRICE + 2;
@@ -19,7 +19,7 @@ public class DeluxePizza extends Pizza
      * @param size is the size of the Deluxe Pizza
      * @param toppings is the list of toppings on the Deluxe Pizza
      */
-    public DeluxePizza(String style, String size, ArrayList<String> toppings)
+    public Deluxe(String style, String size, ArrayList<String> toppings)
     {
         super(style,size,toppings);
     } // DeluxePizza()

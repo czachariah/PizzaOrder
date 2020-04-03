@@ -270,7 +270,7 @@ public class MainStageController implements Initializable
 
         if (typeOfPizza.equals("Deluxe"))
         {
-            DeluxePizza newPizza = new DeluxePizza(typeOfPizza,sizeOfPizza,pizzaToppings);
+            Deluxe newPizza = new Deluxe(typeOfPizza,sizeOfPizza,pizzaToppings);
             pizzaOrder.add(newPizza);
             OutPutArea.appendText("Your new pizza has been added to the order.\n\n");
 
@@ -280,7 +280,7 @@ public class MainStageController implements Initializable
         }
         else if (typeOfPizza.equals("Hawaiian"))
         {
-            HawaiianPizza newPizza = new HawaiianPizza(typeOfPizza,sizeOfPizza,pizzaToppings);
+            Hawaiian newPizza = new Hawaiian(typeOfPizza,sizeOfPizza,pizzaToppings);
             pizzaOrder.add(newPizza);
             OutPutArea.appendText("Your new pizza has been added to the order.\n\n");
 
@@ -290,7 +290,7 @@ public class MainStageController implements Initializable
         }
         else
         {
-            BuildYourOwnPizza newPizza = new BuildYourOwnPizza(typeOfPizza,sizeOfPizza,pizzaToppings);
+            BuildYourOwn newPizza = new BuildYourOwn(typeOfPizza,sizeOfPizza,pizzaToppings);
             pizzaOrder.add(newPizza);
             OutPutArea.appendText("Your new pizza has been added to the order.\n\n");
 

@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author Chris Zachariah (cvz2)
  * @author Anthony Topol (at877)
  */
-public class BuildYourOwnPizza extends Pizza
+public class BuildYourOwn extends Pizza
 {
     public final int BUILD_YOUR_OWN_SMALL_PRICE = 5;
     public final int BUILD_YOUR_OWN_MEDIUM_PRICE = BUILD_YOUR_OWN_SMALL_PRICE + 2;
@@ -16,11 +16,11 @@ public class BuildYourOwnPizza extends Pizza
 
     /**
      * This is the parameterized constructor for the HawaiianPizza class.
-     *  @param style is the type of the pizza : Build-Your-Own
-     * @param size is the size of the Build-Your-Own Pizza
+     *  @param style is the type of the pizza : Build Your Own
+     * @param size is the size of the Build Your Own Pizza
      * @param toppings is the list of toppings on the Build-Your-Own Pizza
      */
-    public BuildYourOwnPizza (String style, String size, ArrayList<String> toppings)
+    public BuildYourOwn(String style, String size, ArrayList<String> toppings)
     {
         super(style,size,toppings);
     } // BuildYourOwnPizza()
