@@ -13,8 +13,8 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    public final int WIDTH = 972;
-    public final int LENGTH = 740;
+    public final int WIDTH = 975;
+    public final int LENGTH = 630;
 
     /**
      * This method sets up the main stage of the GUI and run it.

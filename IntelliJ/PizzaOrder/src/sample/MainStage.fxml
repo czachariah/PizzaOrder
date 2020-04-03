@@ -12,7 +12,7 @@
 <!-- @author Anthony Topol (at877) -->
 <!-- The background pane that holds the whole Stage together. -->
 
-<Pane id="MainBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="972.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainStageController">
+<Pane id="MainBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="975.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainStageController">
     <!-- This grid will hold the top of the GUI: Choosing Pizza and Size Drop-Down Menus and the Pizza Pictures -->
     <GridPane id="TopGrid" layoutX="103.0" prefHeight="233.0" prefWidth="869.0">
         <columnConstraints>
@@ -177,7 +177,7 @@
              </Button>
 
              <!-- Clear Selection Button -->
-             <Button fx:id="ClearSelectionButton" mnemonicParsing="false" onAction="#clearAllToppings" prefHeight="37.0" prefWidth="147.0" text="Clear Selection" GridPane.columnIndex="0" GridPane.rowIndex="2">
+             <Button fx:id="ClearSelectionButton" mnemonicParsing="false" onAction="#clearCurrentSelection" prefHeight="37.0" prefWidth="147.0" text="Clear Selection" GridPane.columnIndex="0" GridPane.rowIndex="2">
                  <font>
                      <Font size="14.0" />
                  </font>
@@ -231,7 +231,7 @@
     <Separator id="BottomSeparator" layoutY="570.0" prefHeight="11.0" prefWidth="972.0" />
 
     <!-- Text Area for some output -->
-   <TextArea fx:id="OutPutArea" editable="false" layoutX="-1.0" layoutY="582.0" prefHeight="160.0" prefWidth="972.0" text="Ready For An Order!">
+   <TextArea fx:id="OutPutArea" editable="false" layoutX="-1.0" layoutY="582.0" prefHeight="51.0" prefWidth="972.0" text="Ready For An Order!">
       <font>
          <Font size="16.0" />
       </font></TextArea>

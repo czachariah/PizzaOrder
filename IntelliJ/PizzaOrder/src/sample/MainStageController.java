@@ -1,19 +1,15 @@
 package sample;
 
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
@@ -29,13 +25,17 @@ import java.util.ResourceBundle;
  */
 public class MainStageController implements Initializable
 {
+    public final int WIDTH = 975;
+    public final int LENGTH = 630;
+
     ArrayList<Pizza> pizzaOrder = new ArrayList<>();
 
     public ArrayList<String> toppings = new ArrayList<>();
+    public ArrayList<String> selectedToppings = new ArrayList<>();
 
     public final int EMPTY = 0;
-    public final int MINTOPPINGS = 1;
-    public final int MAXTOPPINGS = 6;
+    public final int MIN_TOPPINGS = 1;
+    public final int MAX_TOPPINGS = 6;
 
     @FXML
     public ComboBox<String> PizzaTypeDropDown;
@@ -79,25 +79,10 @@ public class MainStageController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // populate the toppings list
-        toppings.add("Beef");
-        toppings.add("Cheese");
-        toppings.add("Chicken");
-        toppings.add("Green Pepper");
-        toppings.add("Ham");
-        toppings.add("Mushroom");
-        toppings.add("Onion");
-        toppings.add("Pepperoni");
-        toppings.add("Pineapple");
-        toppings.add("Sausage");
-        allToppingsList.setItems(FXCollections.observableArrayList(toppings));
-
         // set the pizza type to the default: Build-Your-Own
         PizzaTypeDropDown.setValue("Build Your Own");
         pizzaTypeChange();
 
-        // add 2 newlines to the text Area for to get output
-        OutPutArea.appendText("\n\n");
     } // initialize()
 
     /**
@@ -122,11 +107,27 @@ public class MainStageController implements Initializable
             Image BuildYourOwn = new Image("sample/BuildYourOwnPizza.jpg");
             PizzaImage.setImage(BuildYourOwn);
 
-            // clear out the toppings list
+            // re-populate
             toppings.clear();
 
+            // make sure to give the customer their selection
+            toppings.add("Beef");
+            toppings.add("Cheese");
+            toppings.add("Chicken");
+            toppings.add("Green Pepper");
+            toppings.add("Ham");
+            toppings.add("Mushroom");
+            toppings.add("Onion");
+            toppings.add("Pepperoni");
+            toppings.add("Pineapple");
+            toppings.add("Sausage");
+            allToppingsList.setItems(FXCollections.observableArrayList(toppings));
+
+            // clear out the toppings list
+            selectedToppings.clear();
+
             // now display the toppings list
-            ChoiceToppingList.setItems(FXCollections.observableArrayList(toppings));
+            ChoiceToppingList.setItems(FXCollections.observableArrayList(selectedToppings));
         }
         else if (PizzaTypeDropDown.getValue().equals("Deluxe"))
         {
@@ -142,20 +143,23 @@ public class MainStageController implements Initializable
             // since this is a pre-set pizza, don't let the customer change the ingredients
             AddToppingButton.setDisable(true);
             RemoveToppingButton.setDisable(true);
-            ClearSelectionButton.setDisable(true);
 
             // clear out the toppings list
             toppings.clear();
+            selectedToppings.clear();
+
+            // don't let the customers get any choice to change the toppings (all pre-selected)
+            allToppingsList.setItems(FXCollections.observableArrayList(toppings));
 
             // list out the pre-set toppings for the deluxe pizza
-            toppings.add("Green Pepper");
-            toppings.add("Mushroom");
-            toppings.add("Onion");
-            toppings.add("Pepperoni");
-            toppings.add("Sausage");
+            selectedToppings.add("Green Pepper");
+            selectedToppings.add("Mushroom");
+            selectedToppings.add("Onion");
+            selectedToppings.add("Pepperoni");
+            selectedToppings.add("Sausage");
 
             // now display the toppings list
-            ChoiceToppingList.setItems(FXCollections.observableArrayList(toppings));
+            ChoiceToppingList.setItems(FXCollections.observableArrayList(selectedToppings));
         }
         else
         {
@@ -171,17 +175,20 @@ public class MainStageController implements Initializable
             // since this is a pre-set pizza, don't let the customer change the ingredients
             AddToppingButton.setDisable(true);
             RemoveToppingButton.setDisable(true);
-            ClearSelectionButton.setDisable(true);
 
             // clear out the toppings list
             toppings.clear();
+            selectedToppings.clear();
+
+            // don't let the customers get any choice to change the toppings (all pre-selected)
+            allToppingsList.setItems(FXCollections.observableArrayList(toppings));
 
             // list out the pre-set toppings for the hawaiian pizza
-            toppings.add("Ham");
-            toppings.add("Pineapple");
+            selectedToppings.add("Ham");
+            selectedToppings.add("Pineapple");
 
             // now display the toppings list
-            ChoiceToppingList.setItems(FXCollections.observableArrayList(toppings));
+            ChoiceToppingList.setItems(FXCollections.observableArrayList(selectedToppings));
         }
     } // pizzaTypeChange()
 
@@ -193,25 +200,22 @@ public class MainStageController implements Initializable
         String toppingChoice = allToppingsList.getSelectionModel().getSelectedItem();
         if (toppingChoice == null)
         {
-            OutPutArea.appendText("ERROR: Please first choose a topping from the Toppings List to add to the pizza.\n\n");
+            OutPutArea.clear();
+            OutPutArea.appendText("ERROR: Please first choose a topping from the Toppings List to add to the pizza.");
         }
         else
         {
-            if (toppings.size() < MAXTOPPINGS)
+            if (selectedToppings.size() < MAX_TOPPINGS)
             {
-                if (toppings.contains(toppingChoice))
-                {
-                    OutPutArea.appendText("ERROR: You may only choose a topping at most once.\n\n");
-                }
-                else
-                {
-                    toppings.add(toppingChoice);
-                    ChoiceToppingList.setItems(FXCollections.observableArrayList(toppings));
-                }
+                selectedToppings.add(toppingChoice);
+                ChoiceToppingList.setItems(FXCollections.observableArrayList(selectedToppings));
+                toppings.remove(toppingChoice);
+                allToppingsList.setItems(FXCollections.observableArrayList(toppings));
             }
             else
             {
-                OutPutArea.appendText("ERROR: You may only choose up to 6 toppings.\n\n");
+                OutPutArea.clear();
+                OutPutArea.appendText("ERROR: You may only choose up to 6 toppings.");
             }
         }
     } // addTopping()
@@ -221,32 +225,37 @@ public class MainStageController implements Initializable
      */
     public void removeToppings()
     {
-        if (toppings.size() == EMPTY)
+        if (selectedToppings.size() == EMPTY)
         {
-            OutPutArea.appendText("ERROR: There are no toppings in the Selected Toppings List to be removed.\n\n");
+            OutPutArea.clear();
+            OutPutArea.appendText("ERROR: There are no toppings in the Selected Toppings List to be removed.");
             return;
         }
 
         String toppingToRemove = ChoiceToppingList.getSelectionModel().getSelectedItem();
         if (toppingToRemove == null)
         {
-            OutPutArea.appendText("ERROR: Please first choose a topping from the Selected Toppings List to remove from the pizza.\n\n");
+            OutPutArea.clear();
+            OutPutArea.appendText("ERROR: Please first choose a topping from the Selected Toppings List to remove from the pizza.");
         }
         else
         {
-            toppings.remove(toppingToRemove);
-            ChoiceToppingList.setItems(FXCollections.observableArrayList(toppings));
+            selectedToppings.remove(toppingToRemove);
+            ChoiceToppingList.setItems(FXCollections.observableArrayList(selectedToppings));
+            toppings.add(toppingToRemove);
+            allToppingsList.setItems(FXCollections.observableArrayList(toppings));
         }
     } // removeToppings()
 
     /**
-     * This method will clear all the selected toppings for the Build-Your-Own Pizza.
+     * This method will clear the current selection and set everything back to the default.
      */
-    public void clearAllToppings()
+    public void clearCurrentSelection()
     {
-        toppings.clear();
-        ChoiceToppingList.setItems(FXCollections.observableArrayList(toppings));
-    } // clearAllToppings()
+        // set the pizza type to the default: Build-Your-Own
+        PizzaTypeDropDown.setValue("Build Your Own");
+        pizzaTypeChange();
+    } // clearCurrentSelection()
 
     /**
      * This method adds a new Pizza to the main order.
@@ -255,16 +264,17 @@ public class MainStageController implements Initializable
     {
         String typeOfPizza = PizzaTypeDropDown.getSelectionModel().getSelectedItem();
         String sizeOfPizza = PizzaSizeDropDown.getSelectionModel().getSelectedItem();
-        if (toppings.size() < MINTOPPINGS)
+        if (selectedToppings.size() < MIN_TOPPINGS)
         {
-            OutPutArea.appendText("ERROR: Need to add at least 1 topping on to the pizza.\n\n");
+            OutPutArea.clear();
+            OutPutArea.appendText("ERROR: Need to add at least 1 topping on to the pizza.");
             return;
         }
         ArrayList<String> pizzaToppings = new ArrayList<>();
         int i = 0;
-        while (i < toppings.size())
+        while (i < selectedToppings.size())
         {
-            pizzaToppings.add(toppings.get(i));
+            pizzaToppings.add(selectedToppings.get(i));
             i++;
         }
 
@@ -272,7 +282,8 @@ public class MainStageController implements Initializable
         {
             Deluxe newPizza = new Deluxe(typeOfPizza,sizeOfPizza,pizzaToppings);
             pizzaOrder.add(newPizza);
-            OutPutArea.appendText("Your new pizza has been added to the order.\n\n");
+            OutPutArea.clear();
+            OutPutArea.appendText("Your new pizza has been added to the order.");
 
             // set the pizza type to the default: Build-Your-Own
             PizzaTypeDropDown.setValue("Build Your Own");
@@ -282,7 +293,8 @@ public class MainStageController implements Initializable
         {
             Hawaiian newPizza = new Hawaiian(typeOfPizza,sizeOfPizza,pizzaToppings);
             pizzaOrder.add(newPizza);
-            OutPutArea.appendText("Your new pizza has been added to the order.\n\n");
+            OutPutArea.clear();
+            OutPutArea.appendText("Your new pizza has been added to the order.");
 
             // set the pizza type to the default: Build-Your-Own
             PizzaTypeDropDown.setValue("Build Your Own");
@@ -292,7 +304,8 @@ public class MainStageController implements Initializable
         {
             BuildYourOwn newPizza = new BuildYourOwn(typeOfPizza,sizeOfPizza,pizzaToppings);
             pizzaOrder.add(newPizza);
-            OutPutArea.appendText("Your new pizza has been added to the order.\n\n");
+            OutPutArea.clear();
+            OutPutArea.appendText("Your new pizza has been added to the order.");
 
             // set the pizza type to the default: Build-Your-Own
             PizzaTypeDropDown.setValue("Build Your Own");
@@ -303,28 +316,30 @@ public class MainStageController implements Initializable
     /**
      * This method will change the view of the GUI and load a new stage that will show the entire order and total cost.
      */
-    public void OrderView(ActionEvent event) throws IOException
+    public void OrderView() throws IOException
     {
         // set up the loader
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("TotalOrderStage.fxml"));
         Parent tableViewParent = loader.load();
 
-        // set up the scene
-        Scene tableViewScene = new Scene(tableViewParent);
-
-        // access the controller and send the total order of pizzas
+        // access the controller and pass the reference to the total order of pizzas
         TotalOrderStageController controller = loader.getController();
         controller.getOrder(pizzaOrder);
+        loader.setController(controller);
 
-        // open the new window and set the scene
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(tableViewScene);
-        window.show();
+        // set up the scene
+        Scene tableViewScene = new Scene(tableViewParent,WIDTH,LENGTH);
+
+        // make new stage
+        Stage newStage = new Stage();
+        newStage.setTitle("Pizza Orders");
+        controller.setStage(newStage);
+
+        // make and show the new popup window
+        newStage.initModality(Modality.WINDOW_MODAL);
+        newStage.setScene(tableViewScene);
+        newStage.showAndWait();
+
     } // OrderView()
-
-    public void getOrder(ArrayList<Pizza> order)
-    {
-        pizzaOrder = order;
-    }
 } // MainStageController
