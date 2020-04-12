@@ -23,7 +23,7 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("MainStage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("OrderPage.fxml"));
         primaryStage.setTitle("Chris and Tony's Pizzeria");
         primaryStage.setScene(new Scene(root, WIDTH, LENGTH));
         primaryStage.setResizable(false);
